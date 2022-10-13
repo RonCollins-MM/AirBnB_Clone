@@ -19,7 +19,7 @@ class FileStorage():
     """
 
     __file_path = 'objects.json'
-    __objects = {}
+    __objects = dict()
 
     def all(self):
         """
@@ -31,16 +31,14 @@ class FileStorage():
 
     def new(self, obj):
         """
-        Sets in __objects the passed object with the key <class name>.id. It is
-        the responsibility of the caller of this method to pass an object as a
-        dictionary representation.
+        Sets in __objects the passed object with the key <class name>.id.
 
         Args:
-            obj (:obj: `dict`): The object to be stored
+            obj: The object to be stored
         """
 
-        __objects.update({f'{obj.__class__.__name__}.{obj.id}' : \
-                          '{obj}'})
+        self.__objects.update({f'{obj.__class__.__name__}.{obj.id}' : \
+                          obj.to_dict()})
 
     def save(self):
         """
@@ -58,5 +56,5 @@ class FileStorage():
         """
 
         if os.path.exists(self.__file_path):
-            with open (__file_path, 'r', encoding='utf-8') as f:
+            with open (self.__file_path, 'r', encoding='utf-8') as f:
                 self.__objects = json.loads(f.read())
