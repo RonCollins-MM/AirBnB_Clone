@@ -3,6 +3,7 @@ BaseClass Module - Contains the implementation for the Base Class superclass.
 """
 
 import datetime
+import models
 import uuid
 
 class BaseModel():
@@ -38,6 +39,7 @@ class BaseModel():
             modified. Is first initialized to when instance was created. Will
             be updated with every modification.
             """
+            models.storage.new(self.to_dict())
 
     def __str__(self):
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
@@ -48,6 +50,7 @@ class BaseModel():
         """
 
     def save(self):
+        models.storage.save()
         self.updated_at = datetime.datetime.now()
         """
         Updates the time stamp for when instance attributes are modified with
@@ -59,7 +62,6 @@ class BaseModel():
         inst_dict.update({'__class__': f'{self.__class__.__name__}'})
         inst_dict['created_at'] = self.created_at.isoformat()
         inst_dict['updated_at'] = self.updated_at.isoformat()
-
         return inst_dict
         """
         Generates a dictionary object of the current instance.
