@@ -12,25 +12,32 @@ class BaseModel():
     Defines all common attributes and methods for child classes.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Constructor for BaseModel class.
 
-        Does intialisation of public attributes as described below
+        If a dictionary object is passed as ``**kwargs``, a new object is
+        created using attributes given. Otherwise, a new instance is created
+        with new attributes. (see ``else`` block below)
         """
+        if kwargs:
+            self.id = kwargs['id']
+            self.created_at = \
+            datetime.datetime.fromisoformat(kwargs['created_at'])
+            self.updated_at = \
+            datetime.datetime.fromisoformat(kwargs['updated_at'])
+        else:
+            self.id = str(uuid.uuid4())
+            """str - Unique identifier for each instance"""
 
-        self.id = str(uuid.uuid4())
-        """str - Unique identifier for each instance"""
+            self.created_at = datetime.datetime.now()
+            """datetime: Time when instance is created """
 
-        self.created_at = datetime.datetime.now()
-        """datetime: Time when instance is created """
-
-        self.updated_at = self.created_at
-        """datetime: Time stamp when instance attributes were last modified.
-
-        Is first initialized to when instance was created and is updated with
-        every modification.
-        """
+            self.updated_at = self.created_at
+            """datetime: Time stamp when instance attributes were last
+            modified. Is first initialized to when instance was created. Will
+            be updated with every modification.
+            """
 
     def __str__(self):
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
