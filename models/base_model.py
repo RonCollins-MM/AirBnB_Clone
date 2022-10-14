@@ -33,13 +33,7 @@ class BaseModel():
                     continue
                 else:
                     setattr(self, key, value)
-
-            self.id = kwargs['id']
-            self.created_at = \
-            datetime.datetime.fromisoformat(kwargs['created_at'])
-            self.updated_at = \
-            datetime.datetime.fromisoformat(kwargs['updated_at'])
-        else:
+       else:
             self.id = str(uuid.uuid4())
             """str - Unique identifier for each instance"""
 
