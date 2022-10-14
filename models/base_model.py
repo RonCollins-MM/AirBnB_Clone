@@ -27,13 +27,13 @@ class BaseModel():
         """
         if kwargs:
             for key, value in kwargs.items():
-                if key == 'created_at' or key == 'created_at':
+                if key == 'created_at' or key == 'updated_at':
                     setattr(self, key, datetime.datetime.fromisoformat(value))
                 elif key == '__class__':
                     continue
                 else:
                     setattr(self, key, value)
-       else:
+        else:
             self.id = str(uuid.uuid4())
             """str - Unique identifier for each instance"""
 
