@@ -3,7 +3,9 @@
 This module is the entry point for the command interpreter.
 """
 
+from models.base_model import BaseModel
 import cmd
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -20,6 +22,9 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
+    __classes = {'BaseModel' : BaseModel}
+
+#------------------------------- Elementary functions --------------------------#
     def emptyline(self):
         """
         Method called when emptyline is entered.
@@ -35,6 +40,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
+        print('Exiting ...')
+        print('')
         return True
 
     def help_quit(self):
@@ -45,6 +52,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """EOF signal to exit the program"""
+        print('Exiting ...')
         print('')
         return True
 
@@ -53,6 +61,40 @@ class HBNBCommand(cmd.Cmd):
         print('Enter <EOF> character to exit program.\nAlternatively, you ' +\
               'can use "quit" command. (see <help quit>)')
         print('')
+
+    def help_create(self):
+        """Command Line info for ``create`` function"""
+        print('Use this command to create an object of a class.' + \
+              '\nSyntax: create <class name>\nEx: "create BaseModel"')
+        print('')
+
+
+#------------------------------- Core functions ---------------------------------#
+
+    def do_create(self, args):
+        """
+        Responsible for the creation of instances of Classes.
+
+        If no arguments are passed, or if argument doesn't correspond to
+        existing classes, appropriate error message is printed and function
+        exits.
+        Otherwise, a new instance object is created and saved to the File
+        storage system. ID of created instance will be printed to Command Line.
+
+        Args:
+            args (str): The class name whose instance is to be created.
+        """
+        if not args:
+            print('** class name missing **' + '\n')
+            return
+        elif args not in HBNBCommand.__classes:
+            print('** class doesn\'t exist **' + '\n')
+            return
+        else:
+            new_inst = HBNBCommand.__classes[args]()
+            storage.save()
+            print(new_inst.id + '\n')
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
