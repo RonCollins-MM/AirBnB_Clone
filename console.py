@@ -72,6 +72,14 @@ class HBNBCommand(cmd.Cmd):
               '\nSyntax: show <class name> <object id>')
         print('')
 
+    def help_destroy(self):
+        """Command Line info for ``destroy`` function"""
+        print('Use this command to delete an object of a class based on class'+\
+              'name and id of object' + \
+              '\nSyntax: destroy <class name> <object id>')
+        print('')
+
+
 
 
 #------------------------------- Core functions ---------------------------------#
@@ -136,6 +144,45 @@ class HBNBCommand(cmd.Cmd):
             print(storage._FileStorage__objects[f'{class_nm}.{obj_id}'])
         except KeyError:
             print('** no instance found **')
+
+    def do_destroy(self, args):
+        """
+        Deletes an instance based on class name and id.
+
+        If class name is missing or doesn't exist, or if id is missing, or if
+        instance is not found, appropriate error message is printed and
+        function exits.
+
+        Args:
+            args (str): The class name and id of instance
+        """
+        arg_tup = args.partition(' ')
+        class_nm = arg_tup[0]
+        obj_id = arg_tup[2]
+
+        #Deal with trailing arguments if any
+        if obj_id and ' ' in obj_id:
+            obj_id = obj_id.partition(' ')[0]
+
+        #Check that class name and object id are valid
+        if not class_nm:
+            print('** class name missing **')
+            return
+        if class_nm not in HBNBCommand.__classes:
+            print('** class doesn\'t exist **')
+            return
+        if not obj_id:
+            print('** instance id missing **')
+            return
+
+        #Delete the object
+        try:
+            del(storage.all()[f'{class_nm}.{obj_id}'])
+            storage.save()
+        except KeyError:
+            print('** no instance found **')
+
+
 
 
 if __name__ == '__main__':
