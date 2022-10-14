@@ -27,14 +27,32 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
+    def help_help(self):
+        """Prints more information regarding ``help`` command"""
+        print('Use this command to find out more information about other ' + \
+              'commands. \nSyntax: help <command>')
+        print('')
+
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
+
+    def help_quit(self):
+        """Prints info on how to use quit"""
+        print('Use this command with no arguments to exit the program.\n' + \
+              'Alternatively, you can enter an <EOF> character.\nSyntax: quit')
+        print('')
 
     def do_EOF(self, arg):
         """EOF signal to exit the program"""
         print('')
         return True
+
+    def help_EOF(self):
+        """More info on using EOF"""
+        print('Enter <EOF> character to exit program.\nAlternatively, you ' +\
+              'can use "quit" command. (see <help quit>)')
+        print('')
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
