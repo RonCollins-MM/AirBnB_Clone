@@ -79,6 +79,15 @@ class HBNBCommand(cmd.Cmd):
               '\nSyntax: destroy <class name> <object id>')
         print('')
 
+    def help_all(self):
+        """Command Line info for ``all`` function"""
+        print('Use this command to print objects.\n' + \
+              'If you specify a class name, only objects from that ' + \
+              'class will be printed. ' + \
+              'Otherwise, all objects will be printed.' + \
+              '\nSyntax: all [class name] (class name is optional)')
+        print('')
+
 
 
 
@@ -182,8 +191,33 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print('** no instance found **')
 
+    def do_all(self, args):
+        """
+        Prints the string representation of instances.
 
+        If class name is given, only instances of that class are printed.
+        Otherwise, all instances are printed.
+        All objects are printed as strings.
 
+        Args:
+            args (str, optional): The class name whose instances are to be
+            printed.
+        """
+        objs_as_string = []
+
+        if args:
+            args = args.split(' ')[0] #Ignore any additional args if any
+            if args not in HBNBCommand.__classes:
+                print('** class doesn\'t exist **')
+                return
+            for k, v in storage._FileStorage__objects.items():
+                if k.split('.')[0] == args:
+                    objs_as_string.append(str(v))
+        else:
+            for k, v in storage._FileStorage__objects.items():
+                objs_as_string.append(str(v))
+
+        print(objs_as_string)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
