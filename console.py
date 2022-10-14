@@ -40,8 +40,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
-        print('Exiting ...')
-        print('')
         return True
 
     def help_quit(self):
@@ -53,7 +51,6 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """EOF signal to exit the program"""
         print('Exiting ...')
-        print('')
         return True
 
     def help_EOF(self):
@@ -67,6 +64,14 @@ class HBNBCommand(cmd.Cmd):
         print('Use this command to create an object of a class.' + \
               '\nSyntax: create <class name>\nEx: "create BaseModel"')
         print('')
+
+    def help_show(self):
+        """Command Line info for ``show`` function"""
+        print('Use this command to print an object of a class based on class'+\
+              'name and id of object' + \
+              '\nSyntax: show <class name> <object id>')
+        print('')
+
 
 
 #------------------------------- Core functions ---------------------------------#
@@ -85,15 +90,52 @@ class HBNBCommand(cmd.Cmd):
             args (str): The class name whose instance is to be created.
         """
         if not args:
-            print('** class name missing **' + '\n')
+            print('** class name missing **')
             return
         elif args not in HBNBCommand.__classes:
-            print('** class doesn\'t exist **' + '\n')
+            print('** class doesn\'t exist **')
             return
         else:
             new_inst = HBNBCommand.__classes[args]()
             storage.save()
-            print(new_inst.id + '\n')
+            print(new_inst.id)
+
+    def do_show(self, args):
+        """
+        Prints a string representation of an instance based on class name and
+        id.
+
+        If class name is missing or doesn't exist, or if id is missing, or if
+        instance is not found, appropriate error message is printed and
+        function exits.
+
+        Args:
+            args (str): The class name and id of the instance
+        """
+        arg_tup = args.partition(' ')
+        class_nm = arg_tup[0]
+        obj_id = arg_tup[2]
+
+        #Deal with trailing arguments if any
+        if obj_id and ' ' in obj_id:
+            obj_id = obj_id.partition(' ')[0]
+
+        #Check that class name and object id are valid
+        if not class_nm:
+            print('** class name missing **')
+            return
+        if class_nm not in HBNBCommand.__classes:
+            print('** class doesn\'t exist **')
+            return
+        if not obj_id:
+            print('** instance id missing **')
+            return
+
+        #Print the object
+        try:
+            print(storage._FileStorage__objects[f'{class_nm}.{obj_id}'])
+        except KeyError:
+            print('** no instance found **')
 
 
 if __name__ == '__main__':
