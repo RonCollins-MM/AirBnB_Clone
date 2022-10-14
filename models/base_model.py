@@ -22,9 +22,18 @@ class BaseModel():
         with new attributes. (see ``else`` block below)
         Whenever a new instance is created, it is stored in an instance of the
         FileStorage class.
-        User must call the ``models.storage.save()`` function to save the object to file.
+        User must call the ``models.storage.save()`` function to save the
+        object to file.
         """
         if kwargs:
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'created_at':
+                    setattr(self, key, datetime.datetime.fromisoformat(value))
+                elif key == '__class__':
+                    continue
+                else:
+                    setattr(self, key, value)
+
             self.id = kwargs['id']
             self.created_at = \
             datetime.datetime.fromisoformat(kwargs['created_at'])
