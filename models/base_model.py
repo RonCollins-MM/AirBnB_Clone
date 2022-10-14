@@ -3,9 +3,8 @@ BaseClass Module - Contains the implementation for the Base Class superclass.
 """
 
 import datetime
+import models
 import uuid
-
-storage = __import__('__init__').storage
 
 class BaseModel():
     """
@@ -23,7 +22,7 @@ class BaseModel():
         with new attributes. (see ``else`` block below)
         Whenever a new instance is created, it is stored in an instance of the
         FileStorage class.
-        User must call the ``storage.save()`` function to save the object to file.
+        User must call the ``models.storage.save()`` function to save the object to file.
         """
         if kwargs:
             self.id = kwargs['id']
@@ -43,7 +42,7 @@ class BaseModel():
             modified. Is first initialized to when instance was created. Will
             be updated with every modification.
             """
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
@@ -54,7 +53,7 @@ class BaseModel():
         """
 
     def save(self):
-        storage.save()
+        models.storage.save()
         self.updated_at = datetime.datetime.now()
         """
         Saves object to a JSON file and updates the ``updated_at`` attribute.

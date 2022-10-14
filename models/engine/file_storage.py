@@ -31,7 +31,8 @@ class FileStorage():
 
     def new(self, obj):
         """
-        Sets in __objects the passed object with the key <class name>.id.
+        Sets in __objects the passed object with the key <class name>.id and
+        value of the object as a dictionary representation.
 
         Args:
             obj: The object to be stored
