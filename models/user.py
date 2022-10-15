@@ -11,14 +11,14 @@ class User(BaseModel):
     Inherits from BaseModel with additional attributes.
     """
 
-    email = str()
+    email = ''
     """(str): User email address"""
 
-    password = str()
+    password = ''
     """(str): User password"""
 
-    first_name = str()
+    first_name = ''
     """(str): User first name"""
 
-    last_name = str()
+    last_name = ''
     """(str): User last name"""
