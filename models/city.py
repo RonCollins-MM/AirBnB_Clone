@@ -9,12 +9,12 @@ class City(BaseModel):
     Implementation of City class
     """
 
-    name = str()
+    name = ''
     """
     (str): Name of a City
     """
 
-    state_id = str()
+    state_id = ''
     """
     (str): Will contain the id of the State it is found
     """
