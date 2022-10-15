@@ -15,7 +15,7 @@ class TestAmenityEmptyCreation(unittest.TestCase):
         self.file = 'file.json'
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
         self.x = Amenity()
         self.validAttributes = {
@@ -26,7 +26,7 @@ class TestAmenityEmptyCreation(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
 
     def test_user_has_correct_class_name(self):

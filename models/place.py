@@ -4,6 +4,7 @@ This module handles the Place class
 
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """
     Implementation of Place class

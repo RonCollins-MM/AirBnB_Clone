@@ -4,6 +4,7 @@ This module handles User information
 
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """
     Implementation for user data and methods.

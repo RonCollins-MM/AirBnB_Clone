@@ -14,6 +14,7 @@ from models.user import User
 import json
 import os
 
+
 class FileStorage():
     """
     Handles serialization of instances to JSON files and deserialization of
@@ -22,8 +23,8 @@ class FileStorage():
     Attributes:
         __file_path (str): Path to the JSON file
         __objects (:obj: `dict`): Initially empty but will store all objects by
-        ``<class name>.id`` Example. ``BaseModel`` object with ``id=112233``, the key will
-        be ``BaseModel.112233``
+        ``<class name>.id`` Example. ``BaseModel`` object with ``id=112233``,
+        the key will be ``BaseModel.112233``
     """
 
     __file_path = 'objects.json'
@@ -46,16 +47,16 @@ class FileStorage():
             obj: The object to be stored
         """
 
-        self.__objects.update({f'{obj.__class__.__name__}.{obj.id}' : \
-                          obj})
+        self.__objects.update({f'{obj.__class__.__name__}.{obj.id}': obj})
 
     def save(self):
         """
         Serializes __objects to JSON file at the path specified in __file_path
         attribute.
 
-        A local copy of ``__objects`` is created and then each object is converted
-        to its dictionary representation before being dumped into the JSON file.
+        A local copy of ``__objects`` is created and then each object is
+        converted to its dictionary representation before being dumped
+        into the JSON file.
         """
 
         lcl_copy = self.__objects
@@ -74,11 +75,11 @@ class FileStorage():
         """
 
         if os.path.exists(self.__file_path):
-            with open (self.__file_path, 'r', encoding='utf-8') as f:
+            with open(self.__file_path, 'r', encoding='utf-8') as f:
                 obj_as_dict = json.loads(f.read())
                 for v in obj_as_dict.values():
-                    #Class name is obtained from the dictionary then
-                    #class constructor called to create an object.
-                    #The object is then passed to self.new() to append object
-                    #to __objects attribute
+                    # Class name is obtained from the dictionary then
+                    # class constructor called to create an object.
+                    # The object is then passed to self.new() to append object
+                    # to __objects attribute
                     self.new(eval(v['__class__'])(**v))

@@ -18,7 +18,7 @@ class TestUserCreationEmpty(unittest.TestCase):
         self.file = 'file.json'
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
         self.x = User()
         self.validAttributes = {
@@ -32,7 +32,7 @@ class TestUserCreationEmpty(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
 
     def test_user_has_correct_class_name(self):
@@ -114,7 +114,7 @@ class TestUserCreation(unittest.TestCase):
         self.file = 'file.json'
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
         self.x = User()
         self.x.first_name = "Betty"
@@ -134,11 +134,11 @@ class TestUserCreation(unittest.TestCase):
     def tearDown(self):
         try:
             self.fp.close()
-        except:
+        except Error:
             pass
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
 
     def test_test_all_attrs(self):

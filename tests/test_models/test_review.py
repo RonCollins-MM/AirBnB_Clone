@@ -15,7 +15,7 @@ class TestReviewCreation(unittest.TestCase):
         self.file = 'file.json'
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
         self.x = Review()
         self.validAttributes = {
@@ -28,7 +28,7 @@ class TestReviewCreation(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
 
     def createReview(self):

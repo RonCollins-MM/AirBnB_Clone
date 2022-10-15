@@ -15,7 +15,7 @@ class TestCityCreation(unittest.TestCase):
         self.file = 'file.json'
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
         self.x = City()
         self.validAttributes = {
@@ -27,7 +27,7 @@ class TestCityCreation(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove(self.file)
-        except:
+        except Error:
             pass
 
     def createCity(self):

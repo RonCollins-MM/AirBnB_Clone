@@ -6,6 +6,7 @@ import datetime
 import models
 import uuid
 
+
 class BaseModel():
     """
     Implementation for the BaseModel class.

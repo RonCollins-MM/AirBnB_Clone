@@ -19,6 +19,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+
 class HBNBCommand(cmd.Cmd):
     """
     Implementation class for the command interpreter.
@@ -33,18 +34,19 @@ class HBNBCommand(cmd.Cmd):
     """String to display as prompt to user for command"""
 
     __classes = {
-                 'BaseModel' : BaseModel, 'User' : User,
-                 'Amenity': Amenity, 'City': City,
-                 'Place' : Place, 'Review' : Review,
-                 'State' : State
-                }
+        'BaseModel': BaseModel, 'User': User,
+        'Amenity': Amenity, 'City': City,
+        'Place': Place, 'Review': Review,
+        'State': State
+    }
 
-    __types = {'number_rooms': int, 'number_bathrooms': int,
-                'max_guest': int, 'price_by_night': int,
-               'latitude': float, 'longitude': float
-              }
+    __types = {
+        'number_rooms': int, 'number_bathrooms': int,
+        'max_guest': int, 'price_by_night': int,
+        'latitude': float, 'longitude': float
+    }
 
-#------------------------------- Elementary functions --------------------------#
+# ------------------------------- Elementary functions -----------------------#
     def emptyline(self):
         """
         Method called when emptyline is entered.
@@ -54,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_help(self):
         """Prints more information regarding ``help`` command"""
-        print('Use this command to find out more information about other ' + \
+        print('Use this command to find out more information about other ' +
               'commands. \nSyntax: help <command>')
         print('')
 
@@ -64,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_quit(self):
         """Prints info on how to use quit"""
-        print('Use this command with no arguments to exit the program.\n' + \
+        print('Use this command with no arguments to exit the program.\n' +
               'Alternatively, you can enter an <EOF> character.\nSyntax: quit')
         print('')
 
@@ -75,52 +77,49 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         """More info on using EOF"""
-        print('Enter <EOF> character to exit program.\nAlternatively, you ' +\
+        print('Enter <EOF> character to exit program.\nAlternatively, you ' +
               'can use "quit" command. (see <help quit>)')
         print('')
 
     def help_create(self):
         """Command Line info for ``create`` function"""
-        print('Use this command to create an object of a class.' + \
+        print('Use this command to create an object of a class.' +
               '\nSyntax: create <class name>\nEx: "create BaseModel"')
         print('')
 
     def help_show(self):
         """Command Line info for ``show`` function"""
-        print('Use this command to print an object of a class based on class'+\
-              'name and id of object' + \
+        print('Use this command to print an object of a class based on class' +
+              'name and id of object' +
               '\nSyntax: show <class name> <object id>')
         print('')
 
     def help_destroy(self):
         """Command Line info for ``destroy`` function"""
-        print('Use this command to delete an object of a class based on class'+\
-              'name and id of object' + \
+        print('Use this command to delete an object of a class based on ' +
+              'class name and id of object' +
               '\nSyntax: destroy <class name> <object id>')
         print('')
 
     def help_all(self):
         """Command Line info for ``all`` function"""
-        print('Use this command to print objects.\n' + \
-              'If you specify a class name, only objects from that ' + \
-              'class will be printed. ' + \
-              'Otherwise, all objects will be printed.' + \
+        print('Use this command to print objects.\n' +
+              'If you specify a class name, only objects from that ' +
+              'class will be printed. ' +
+              'Otherwise, all objects will be printed.' +
               '\nSyntax: all [class name] (class name is optional)')
         print('')
 
     def help_update(self):
         """Command Line info for ``update`` function"""
-        print('Use this command to update object attributed.' +\
-              '\nSyntax: update <class name> <object id> <att name> <att ' +\
-              'value>  - To update one attribute at a time or: ' +\
-              '\n\t update <class name> <object id> {"att name":"att value"' +\
+        print('Use this command to update object attributed.' +
+              '\nSyntax: update <class name> <object id> <att name> <att ' +
+              'value>  - To update one attribute at a time or: ' +
+              '\n\t update <class name> <object id> {"att name":"att value,"' +
               ' ...}  - To update many attributes at once')
         print('')
 
-
-
-
-#------------------------------- Core functions ---------------------------------#
+# ------------------------------- Core functions ----------------------------#
 
     def do_create(self, args):
         """
@@ -162,11 +161,11 @@ class HBNBCommand(cmd.Cmd):
         class_nm = arg_tup[0]
         obj_id = arg_tup[2]
 
-        #Deal with trailing arguments if any
+        # Deal with trailing arguments if any
         if obj_id and ' ' in obj_id:
             obj_id = obj_id.partition(' ')[0]
 
-        #Check that class name and object id are valid
+        # Check that class name and object id are valid
         if not class_nm:
             print('** class name missing **')
             return
@@ -177,7 +176,7 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
             return
 
-        #Print the object
+        # Print the object
         try:
             print(storage._FileStorage__objects[f'{class_nm}.{obj_id}'])
         except KeyError:
@@ -198,11 +197,11 @@ class HBNBCommand(cmd.Cmd):
         class_nm = arg_tup[0]
         obj_id = arg_tup[2]
 
-        #Deal with trailing arguments if any
+        # Deal with trailing arguments if any
         if obj_id and ' ' in obj_id:
             obj_id = obj_id.partition(' ')[0]
 
-        #Check that class name and object id are valid
+        # Check that class name and object id are valid
         if not class_nm:
             print('** class name missing **')
             return
@@ -213,9 +212,9 @@ class HBNBCommand(cmd.Cmd):
             print('** instance id missing **')
             return
 
-        #Delete the object
+        # Delete the object
         try:
-            del(storage.all()[f'{class_nm}.{obj_id}'])
+            del (storage.all()[f'{class_nm}.{obj_id}'])
             storage.save()
         except KeyError:
             print('** no instance found **')
@@ -235,7 +234,7 @@ class HBNBCommand(cmd.Cmd):
         objs_as_string = []
 
         if args:
-            args = args.split(' ')[0] #Ignore any additional args if any
+            args = args.split(' ')[0]  # Ignore additional args if any
             if args not in HBNBCommand.__classes:
                 print('** class doesn\'t exist **')
                 return
@@ -297,7 +296,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print('** instance id missing **')
             return
-
         # check if object exists
         if f'{class_nm}.{obj_id}' not in storage.all():
             print('** no instance found **')
@@ -306,15 +304,15 @@ class HBNBCommand(cmd.Cmd):
         # Check if attributes to be added have been passed as
         # *args or **kwargs
         if '{' in args[2] and '}' in args[2] and type(eval(args[2])) is dict:
-            # If this line is reached, it is **kwargs. Store ALL the key/values in
-            # a list
+            # If this line is reached, it is **kwargs. Store ALL the
+            # key/ values in a list
             kwargs = eval(args[2])
             args = []
             for k, v in kwargs.items():
                 args.append(k)
                 args.append(v)
         else:
-            # if this line is reached, it is *args. 
+            # if this line is reached, it is *args.
             args = args[2]
 
             # First, obtain attribute name.
@@ -333,22 +331,21 @@ class HBNBCommand(cmd.Cmd):
 
             # We have attribute name. Now let's get the value. Again, it could
             # be quoted or not
-            if args[2] and args[2][0] == '\"': # if quoted
+            if args[2] and args[2][0] == '\"':  # if quoted
                 att_val = args[2][1:args[2].find('\"', 1)]
 
-            if not att_val and args[2]: # if not quoted
+            if not att_val and args[2]:  # if not quoted
                 att_val = args[2].partition(' ')[0]
 
             # We have attribute name and value now. Store in a list just like
             # **kwargs
             args = [att_nm, att_val]
 
-
-        # At this point, args is a list that contains the attribute name and value. 
+        # At this point, args contains the attribute name and value.
         # Now, we retrieve the object to update and do the updating work.
         obj = storage.all()[f'{class_nm}.{obj_id}']
 
-        # Iterate through the args list to update object in a way that preserves
+        # Iterate through args list to update object in a way that preserves
         # mutliple attribute names and values. (in case a dict was passed)
         for i, att_nm in enumerate(args):
             if (i % 2 == 0):
