@@ -7,8 +7,9 @@ This module is the entry point for the command interpreter.
     do_update().
 """
 
-from models.base_model import BaseModel
 import cmd
+from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 class HBNBCommand(cmd.Cmd):
@@ -24,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     """String to display as prompt to user for command"""
 
-    __classes = {'BaseModel' : BaseModel}
+    __classes = {'BaseModel' : BaseModel, 'User' : User}
 
     __types = {'number_rooms': int, 'number_bathrooms': int,
                 'max_guest': int, 'price_by_night': int,
