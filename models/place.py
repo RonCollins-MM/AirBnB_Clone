@@ -9,22 +9,22 @@ class Place(BaseModel):
     Implementation of Place class
     """
 
-    city_id = str()
+    city_id = ''
     """
     (str): Will hold the id of the City it is found
     """
 
-    user_id = str()
+    user_id = ''
     """
     (str): Will hold the id of the State it is found
     """
 
-    name = str()
+    name = ''
     """
     (str): Name of a place
     """
 
-    description = str()
+    description = ''
     """
     (str): Will hold the description of the place
     """
