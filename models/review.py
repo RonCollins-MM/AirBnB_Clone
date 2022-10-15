@@ -9,15 +9,15 @@ class Review(BaseModel):
     Implementation of Review class
     """
 
-    place_id = str()
+    place_id = ''
     """
     (str): Will be Place.id
     """
-    user_id = str()
+    user_id = ''
     """
     (str): Will be User.id
     """
-    text = str()
+    text = ''
     """
     (str): The actual review
     """
