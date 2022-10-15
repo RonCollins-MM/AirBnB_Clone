@@ -19,12 +19,10 @@ class HBNBCommand(cmd.Cmd):
     The inbuilt ``cmd`` module contains the necessary tools (inherited
     attributes) to setup a custom line-oriented
     command interpreter.
-
-    Attributes:
-        prompt (str): The string to display as prompt for commands.
     """
 
     prompt = '(hbnb) '
+    """String to display as prompt to user for command"""
 
     __classes = {'BaseModel' : BaseModel}
 
