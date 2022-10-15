@@ -9,7 +9,7 @@ class State(BaseModel):
     Implementation of State class
     """
 
-    name = str()
+    name = ''
     """
     (str): Name of a state
     """
