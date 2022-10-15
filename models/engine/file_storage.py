@@ -2,7 +2,7 @@
 This module contains implementation for FileStorage class that is responsible
 to storage of objects to files and reading objects from files.
 """
-
+from models.user import User
 from models.base_model import BaseModel
 import json
 import os
