@@ -9,7 +9,7 @@ class Amenity(BaseModel):
     Implementation of Amenity class
     """
 
-    name = str()
+    name = ''
     """
     (str): Name of a Amenity
     """
