@@ -78,11 +78,6 @@ Command | Description
 `all` | Prints all string representations of all instances
 `all <class>` | Prints all string representations of all instances based on class name
 `update <class> <id> <attribute name> "<attribute value>"` | Updates an attribute of an instance based on class name and id
-`<class>.all()` | Retrieves all instances of a class
-`<class>.count()` | Retrieves the number of instances of a class
-`<class>.show(<id>)` | Retrieves an instance based on its id
-`<class>.destroy(<id>)` | Destroys an instance based on its id
-
 ---
 
 <center> <h2>How to Use</h2> </center>
