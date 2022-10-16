@@ -1,16 +1,13 @@
-<i>(full readme to be updated later ....)</i>
-
-This project is intended to solidify the concepts of higher level programming through building a real world project: <b>An AirBnB Clone</b>.
-
-The clone  won't be an exact replica, but will have all the key components needed for the core learning.
-
-It will be implemented in stages as follows, with each stage focused on building a different aspect of the platform:
-<li>The command interpreter</li>
-<li>The database</li>
-<li>A web interface</li>
-<li>Necessary API between the components</li>
-
-<h1>The first stage is to build the command interpreter. </h1>
-The main purpose of this interpreter is to have a terminal like environment where testing and debugging of the platform can occur during development.
-
-<i> More information to be added ... </i>
+<h1> AirBnB Clone Project </h1>
+<p>
+This project is intended to be a hands-on learning process of building a full-scale software application that consists of:
+<li>A web interface for user interaction</li>
+<li>A Database Management System</li>
+<li>A Server that hosts the main application</li>
+<li>A debugging interface for the developer (in this case, a command line interpreter)</li>
+</p>
+<p>
+All the components above are built in stages. The first stage is to build a small prototype of the main system - a basic command line interpreter that is able to manipulate <b><em>objects</em></b> that are stored in a JSON file storage system. This would mainly be implemented in <b>Python</b>Next, a static webpage would be built in <b>HTML</b> and <b>CSS</b> before functionality is added with <b>Javascript</b>. After that, a proper Database management system would be set up using <b>MySQL</b>. Finally, a server would be setup using tools like <b>Puppet</b> among others.
+</p>
+<h2>The Command Interpreter</h2>
+The command interpreter is written in Python and its code is contained in the ``console.py`` module.
